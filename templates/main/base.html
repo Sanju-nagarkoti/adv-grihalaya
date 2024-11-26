@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      
+      {% block title %}Grihalaya Sewa{% endblock title %}
+    </title>
+    {% block css %}
+
+    <link rel=stylesheet href="{% static 'css/mycss.css' %}">
+    
+    {% endblock  %}
+    
+    <!-- box icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- google fonts links -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+   {% include "main/navbar.html" %}
+   
+     {% block content %}{% endblock content %}
+     
+     
+     {% comment %} footer section {% endcomment %}
+     <footer>
+        <div class="footer-container">
+          
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="aboutus/">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/terms">Terms & Conditions</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-about">
+            <h4>About Grihalaya Sewa</h4>
+            <p>Your one-stop solution for seamless home rentals. Explore, connect, and rent with ease.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Follow Us</h4>
+            <ul>
+              <li><a href="https://facebook.com"><i class='bx bxl-facebook' ></i> Facebook</a> </li>
+              <li><a href="https://instagram.com"><i class='bx bxl-instagram-alt'></i> Instagram</a></li>
+              <li><a href="https://whatsapp.com"><i class='bx bxl-whatsapp'></i> whatsapp</a> </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Grihalaya Sewa. All Rights Reserved.</p>
+        </div>
+      </footer>
+    
+</body>
+</html>

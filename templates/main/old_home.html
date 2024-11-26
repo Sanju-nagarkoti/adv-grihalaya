@@ -7,8 +7,7 @@
     <title>Grihalaya Sewa</title>
     <link rel=stylesheet href="{% static 'css/mycss.css' %}">
     <!-- box icons -->
-    <link rel="stylesheet"
-  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   <!-- google fonts links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +20,15 @@
             <img src="{% static 'photos/logo.jpg' %}" alt="">
         </a>
         <ul class="navbar">
-        <li><a href="#">Home</a></li>
-        <li><a href="/aboutus.html">About Us</a></li>
-        <li><a href="#">Buying</a></li>
-        <li><a href="#">Renting</a></li>
-        <li><a href="/rent.html">Selling</a></li>
-        <li><a href="/c.html">Contact Us</a></li>
+        <li><a class="active" href="{% url "home" %}">Home</a></li>
+        <li><a href="{% url "aboutus" %}">About Us</a></li>
+        <li><a href="{% url "buying" %}">Buying</a></li>
+        <li><a href="{% url "selling" %}">Selling</a></li>
+        <li><a href="{% url "contactus" %}">Contact Us</a></li>
         </ul>
         <div class="h-btn">
-            <a href="#"  class="h-btn1">Login</a>
-            <a href="signup.html"  class="h-btn2">Sign Up</a>
+            <a href="{% url "login" %}"  class="h-btn1">Login</a>
+            <a href="{% url "signup" %}"  class="h-btn2">Sign Up</a>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
      </header>
@@ -48,7 +46,7 @@
         </div>
         </div>
         <div class="home-img">
-            <img src="{% static 'photos/home.png.jpg' %}" alt="">
+            <img src="{% static 'photos/home.png' %}" alt="">
         </div>
       </section>
     
@@ -59,7 +57,7 @@
             </div>
             <div class="property-content">
                 <div class="row">
-                    <img src="{% static 'photos/house.jpg.jpg' %}" alt="">
+                    <img src="{% static 'photos/house.jpg' %}" alt="">
                     <p>Sipadol,Bhaktaur</p>
                     <div class="list">
                         <a href="#" class="Residence-List">
@@ -78,7 +76,7 @@
                     
                 </div>
                 <div class="row">
-                    <img src="{% static 'photos/h2.jpg.jpg' %}" alt="">
+                    <img src="{% static 'photos/h2.jpg' %}" alt="">
                     <p>Lokanthali,Bhaktapur</p>
                     <div class="list">
                         <a href="#" class="Residence-List">
@@ -97,7 +95,7 @@
                     
                 </div>
                 <div class="row">
-                    <img src="{% static 'photos/h3.jpg.jpg' %}" alt="">
+                    <img src="{% static 'photos/h3.jpg' %}" alt="">
                     <p>Dekocha,Bhaktapur</p>
                     <div class="list">
                         <a href="#" class="Residence-List">
@@ -117,19 +115,20 @@
                 </div>
             </div>
             <div class="center-btn">
-                <a href="#" class="btn">View All Properties</a>
+                <a href="{% url "buying" %}" class="btn">View All Properties</a>
             </div>
         </section>
 
         <!-- about section -->
          <section class="about">
             <div class="about-img">
-                <img src="photos/Group 1.png">
+                <img src="{% static 'photos/Group 1.png' %}" alt="">
+
             </div>
             <div class="about-text">
                 <h2>We Help People To Find Homes </h2>
                 <p>Grihalaya Sewa is the online websites designed to solve the problem of every person trying to find a reliable home and landlords to rent a house. This website mainly focuses on connecting landlords and renters.The objective of Grihalaya Sewa is to create a user-friendly home rental platform that streamlines the process of renting properties, providing both landlords and tenants with a reliable, accessible, and transparent digital solution.</p>
-                <a href="c.html" class="btn">Get In Touch</a>
+                <a href="{% url "contactus" %}" class="btn">Get In Touch</a>
             </div>
          </section>
          <!-- subbscribe -->
@@ -137,7 +136,7 @@
             <div class="Subscribe-content">
                 <h2>Let's Simply Being With Rentiz</h2>
                 <p>Grihalaya Sewa project aims to develop a sophisticated rental platform with powerful algorithms for personalized matching, dynamic pricing, and vacancy prediction, thereby streamlining the rental process for both tenants and landlords. </p>
-                <a href="login.html" class="btn">Get Started</a>
+                <a href="{% url "home" %}" class="btn">Get Started</a>
             </div>
           </section>
           <!-- contact -->
@@ -145,42 +144,37 @@
           
             <div class="contact-content">
                 <h4>Projects</h4>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Houses for Buy</a></li>
-                <li><a href="#">Renting Properties</a></li>
-                <li><a href="#">Selling Properties</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="{% url "aboutus" %}">About Us</a></li>
+                <li><a href="{% url "buying" %}">Houses for Buy</a></li>
+                <li><a href="{% url "selling" %}">Selling Properties</a></li>
+                <li><a href="{% url "contactus" %}">Contact Us</a></li>
+            </div>
+            <div class="contact-content">
+                <h4>Projects</h4>
+                <li><a href="{% url "aboutus" %}">About Us</a></li>
+                <li><a href="{% url "buying" %}">Houses for Buy</a></li>
+                <li><a href="{% url "selling" %}">Selling Properties</a></li>
+                <li><a href="{% url "contactus" %}">Contact Us</a></li>
 
             </div>
             <div class="contact-content">
                 <h4>Projects</h4>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Houses for Buy</a></li>
-                <li><a href="#">Renting Properties</a></li>
-                <li><a href="#">Selling Properties</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="{% url "aboutus" %}">About Us</a></li>
+                <li><a href="{% url "buying" %}">Houses for Buy</a></li>
+                <li><a href="{% url "selling" %}">Selling Properties</a></li>
+                <li><a href="{% url "contactus" %}">Contact Us</a></li>
 
             </div>
             <div class="contact-content">
                 <h4>Projects</h4>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Houses for Buy</a></li>
-                <li><a href="#">Renting Properties</a></li>
-                <li><a href="#">Selling Properties</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="{% url "aboutus" %}">About Us</a></li>
+                <li><a href="{% url "buying" %}">Houses for Buy</a></li>
+                <li><a href="{% url "selling" %}">Selling Properties</a></li>
+                <li><a href="{% url "contactus" %}">Contact Us</a></li>
 
             </div>
             <div class="contact-content">
-                <h4>Projects</h4>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Houses for Buy</a></li>
-                <li><a href="#">Renting Properties</a></li>
-                <li><a href="#">Selling Properties</a></li>
-                <li><a href="#">Contact Us</a></li>
-
-            </div>
-            <div class="contact-content">
-                <img src="photos/logo.jpg">
+                <img src="{% static 'photos/logo.jpg' %}" alt="">
                 <p>Grihalaya Sewa</p>
                 <div class="icons">
                     <a href="#"><i class='bx bxl-facebook' ></i></a>
@@ -200,7 +194,7 @@
 </html>
 
    
-    <img src="{% static 'images/img.jpg' %}" alt="">
+    {% comment %} <img src="{% static 'images/img.jpg' %}" alt=""> {% endcomment %}
 
 
     <script src="{% static 'js/myjs.js' %}"></script>

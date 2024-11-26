@@ -1,0 +1,19 @@
+{% load static %}
+<header>
+    <a href="#" class="logo">
+        <img src="{% static 'photos/logo.jpg' %}" alt="">
+    </a>
+    <ul class="navbar">
+    <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
+    <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
+    <li><a class="{{buying}}" href="{% url "buying" %}">Buying</a></li>
+    <li><a class="{{selling}}" href="{% url "selling" %}">Selling</a></li>
+    <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
+    </ul>
+    <div class="h-btn">
+        <a href="{% url "login" %}"  class="h-btn1">Login</a>
+        <a href="{% url "signup" %}"  class="h-btn2">Sign Up</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </div>
+ </header>
+ 

@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+{% block title %}ContactUs{% endblock title %}
+
+{% block css %}
+
+{{ block.super }}
+
+<link rel="stylesheet" href="{% static "css/contactus.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+        
+
+
+    <h1>Contact Us</h1>
+
+    <div class="contact-info">
+        <p><i class='bx bx-home'></i> <span>Address:</span> Dekocha, Bhaktapur, Nepal</p>
+        <p><i class='bx bx-phone'></i> <span>Call Us:</span> +977-9841057532</p>
+        <p><i class='bx bx-envelope'></i> <span>Email:</span> grihalayasewa.np@gmail.com</p>
+        <p><i class='bx bx-time'></i> <span>Opening Hours:</span> Sunday - Saturday: 7:00 AM - 6:00 PM</p>
+    </div>
+
+    <div class="form-container">
+        <form action="/submit_contact_form" method="POST">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+

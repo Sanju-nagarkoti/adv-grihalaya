@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Grihalaya Sewa</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        {% comment %} body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        } {% endcomment %}
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Work Sans', sans-serif;
+        }
+        
+        :root{
+            --h1-font:5rem;
+            --h2-font: 2.9rem;
+            --p-font: 1.1rem;
+        
+            --bg-color: white;
+            --text_color: black;
+            --main-color: #1aa090;
+            --other_color:black;
+        }
+        body{
+            background: var(--bg-color);
+            color: var(--text_color);
+        }
+        header{
+            width: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1aa090;
+            padding: 1px ;
+            transition: all .50s ease;
+        }
+        .logo img{
+            height: 100px;
+            width: 100px;
+            border-radius: 70px;
+        
+        }
+        .navbar{
+            display: flex;
+        }
+        .navbar a{
+            padding: 10px 25px;
+            font-size: var(--p-font);
+            font-weight: 500;
+            color: var(--other_color);
+            transition: all .40s ease;
+        }
+        {% comment %} .navbar li a {
+            color: black;
+            text-decoration: none;
+        } {% endcomment %}
+        
+        .navbar li a.active {
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        
+        .navbar a:hover{
+            color: var(--text_color);
+        }
+        .h-btn{
+            display: flex;
+            align-items: center;
+            
+        }
+        .h-btn2{
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--main-color);
+            color: var(--text_color);
+            font-size: 18px;
+            font-weight: 600;
+            margin-left: 20px;
+            transition: all .40s ease;
+        }
+        .h-btn1{
+            color: var(--other_color);
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .h-btn1:hover{
+            transform: translateX(-7px);
+        }
+        .h-btn2:hover{
+            transform: translateX(-7px);
+        }
+        #menu-icon{
+            color: var(--text_color);
+            font-size: 40px;
+            margin-left: 5px;
+            z-index: 10001;
+            cursor: pointer;
+            display: none;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            margin-top:200px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+            
+        }
+
+        .logo img {
+            width: 100px;
+            border-radius: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            color: #666;
+            margin: 8px 0;
+            display:flex;
+            padding-left: 150px;
+            
+        }
+        
+        .contact-info i {
+            color:#1aa090photos/;
+            margin-right: 1.5px;
+        }
+
+        .contact-info p span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #1aa090;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4ecabc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'photos/logo.jpg' %}" alt="">
+        </a>
+        <ul class="navbar">
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li><a href="{% url "aboutus" %}">About Us</a></li>
+        <li><a href="{% url "buying" %}">Buying</a></li>
+        <li><a href="{% url "selling" %}">Selling</a></li>
+        <li><a class="active" href="{% url "contactus" %}">Contact Us</a></li>
+        </ul>
+        <div class="h-btn">
+            <a href="{% url "login" %}"  class="h-btn1">Login</a>
+            <a href="{% url "signup" %}"  class="h-btn2">Sign Up</a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+     </header>
+    <div class="container">
+        
+        <div class="logo">
+            <img src="{% static 'photos/logo.jpg' %}" alt="Grihalaya Sewa - Home Service">
+            
+        </div>
+
+        <h1>Contact Us</h1>
+
+        <div class="contact-info">
+            <p><i class='bx bx-home'></i> <span>Address:</span> Dekocha, Bhaktapur, Nepal</p>
+            <p><i class='bx bx-phone'></i> <span>Call Us:</span> +977-9841057532</p>
+            <p><i class='bx bx-envelope'></i> <span>Email:</span> grihalayasewa.np@gmail.com</p>
+            <p><i class='bx bx-time'></i> <span>Opening Hours:</span> Sunday - Saturday: 7:00 AM - 6:00 PM</p>
+        </div>
+
+        <div class="form-container">
+            <form action="/submit_contact_form" method="POST">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

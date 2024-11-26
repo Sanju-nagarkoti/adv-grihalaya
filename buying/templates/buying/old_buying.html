@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel=stylesheet href="{% static 'buying/css/buying.css' %}">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="{% static 'photos/logo.jpg' %}" alt="">
+        </a>
+        <ul class="navbar">
+        <li><a  href="{% url "home" %}">Home</a></li>
+        <li><a href="{% url "aboutus" %}">About Us</a></li>
+        <li><a class="active" href="{% url "buying" %}">Buying</a></li>
+        <li><a href="{% url "selling" %}">Selling</a></li>
+        <li><a href="{% url "contactus" %}">Contact Us</a></li>
+        </ul>
+        <div class="h-btn">
+            <a href="{% url "login" %}"  class="h-btn1">Login</a>
+            <a href="{% url "signup" %}"  class="h-btn2">Sign Up</a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+     </header>
+     <h1>Properties For You</h1>
+  
+    
+   <div class="container" id="property-container">
+        
+        <!-- Existing Properties -->
+        <div class="property-box">
+            <img src="{% static 'buying/photos/hm.png' %}" alt="Property Image">
+            <div class="property-title">Ravi Bhawan, Machha Gate</div>
+            <div class="property-price">Price: 70 thousand per month</div>
+            <button class="rent-button">Send Buy Request</button>
+        </div>
+
+        <div class="property-box">
+            <img src="{% static 'buying/photos/home2.jpeg' %}" alt="Property Image">
+            <div class="property-title">Samakhusi Rental</div>
+            <div class="property-price">Price: 1 lakh 40 thousand per month</div>
+            <button class="rent-button">Send Buy Request</button>
+        </div>
+
+        <div class="property-box">
+            <img src="{% static 'buying/photos/home3.jpg' %}" alt="Property Image">
+            <div class="property-title">Bhaisapati, Reliable Colony</div>
+            <div class="property-price">Price: 1 lakh 10 thousand per month</div>
+            <button class="rent-button">Send Buy Request</button>
+        </div>
+    </div>
+
+</body>
+</html>
