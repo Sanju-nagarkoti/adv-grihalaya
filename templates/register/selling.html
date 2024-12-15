@@ -6,8 +6,10 @@
 
 {% block css %}
 
+
 {{ block.super }}
-<link rel="stylesheet" href="{% static "selling/css/selling.css" %}">
+
+<link rel="stylesheet" href="{% static "css/selling.css" %}">
 
 {% endblock css %}
 
@@ -16,6 +18,7 @@
 <div class="main">
     <h1>Properties For Rent</h1>
     <br>
+    <div class="guide">
     <div class="guidelines">
       <h2>Guidelines for Listing Properties</h2>
       <ul>
@@ -25,6 +28,7 @@
           <li><strong>Images:</strong> Upload high-quality, clear images that showcase the property from different angles.</li>
           <li>Ensure the details are accurate to build trust with potential buyers or renters.</li>
       </ul>
+    </div>
   </div>
       
       <button class="add-property-button" onclick="openModal()">Add Property</button>
@@ -32,6 +36,7 @@
       <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
           <h2>Add New Property</h2>
+          <input type="text" id="title" placeholder="Enter title">
           <input type="text" id="location" placeholder="Enter Location">
           <input type="text" id="price" placeholder="Enter Price">
           <label for="images">Upload Images:</label><br>
@@ -55,17 +60,19 @@
 
     // Function to add a new property
     function addProperty() {
+        const title = document.getElementById('title').value;
         const location = document.getElementById('location').value;
         const price = document.getElementById('price').value;
         const image = document.getElementById('image').value;
         const description = document.getElementById('description').value;
 
-        if (location && price && image && description) {
+        if (title && location && price && image && description) {
             const container = document.getElementById('property-container');
             const newProperty = document.createElement('div');
             newProperty.classList.add('property-box');
             newProperty.innerHTML = `
                 <img src="${image}" alt="Property Image">
+                <div class="property-title">${title}</div>
                 <div class="property-title">${location}</div>
                 <div class="property-price">Price: ${price}</div>
                 <div>${description}</div>
@@ -77,6 +84,7 @@
             closeModal();
 
             // Clear the input fields
+            document.getElementById('title').value = '';
             document.getElementById('location').value = '';
             document.getElementById('price').value = '';
             document.getElementById('image').value = '';

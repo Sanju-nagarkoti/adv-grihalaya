@@ -58,9 +58,9 @@
             width: 95%;
         }
 
-        .login-container input[type="submit"] {
+        .login-container button[type="submit"] {
             padding: 10px;
-            background-color: #5cb85c;
+            background-color: #1aa090;
             border: none;
             border-radius: 4px;
             color: white;
@@ -68,12 +68,16 @@
             cursor: pointer;
         }
 
-        .login-container input[type="submit"]:hover {
-            background-color: #4cae4c;
+        .login-container button[type="submit"]:hover {
+            background-color:rgb(25, 147, 133);
         }
         .register-link{
             color:grey;
             font-size: 10px;
+            margin-top:10px;
+        }
+        .register-link:hover{
+            color:blue;
         }
     </style>
 </head>
@@ -83,18 +87,21 @@
         <img src="{% static 'photos/logo.jpg' %}" alt="">
         </div>
        <div class="login-container">
-        <h2>Login</h2>
-        <form action="home.html" method="post">
-            <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" placeholder="Enter your name" required><br>
+        <h1>Login</h1>
 
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter password" required><br>
-
-            <input type="submit" value="Login"><br>
-            <br>
-            <a href="{% url "signup" %}" class="register-link">Don't have an account? Register Now</a>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <a href="{% url "signup" %}" class="register-link">Don't have an account? Register Now</a>
     </div>
         
     </div>

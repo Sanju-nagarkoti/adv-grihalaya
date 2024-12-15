@@ -3,14 +3,21 @@ h1{
   text-align: center;
   padding-top: 10px;
 }
+.main{
+  height: 55vh;
+  align-items: center;
+}
+.guide{
+  display: flex;
+  justify-content: center;
+}
 .guidelines {
-  
+align-content: center;
 background-color:#ccc;
 border: 1px solid #0f0808;
 padding: 15px;
 border-radius: 8px;
 width: 50%;
-align-items: center;
 }
 .guidelines h2 {
 font-size: 1.2em;
@@ -67,6 +74,11 @@ border-radius: 5px;
 border: 1px solid #ccc;
 }
 
+/* .modal #title{
+  font-weight: 700;
+  font-size: 18px; 
+} */
+
 .modal button {
 padding: 10px 15px;
 margin-top: 10px;
@@ -76,4 +88,14 @@ margin-top: 10px;
 color: red;
 font-size: 20px;
 cursor: pointer;
+}
+
+.rent-button{
+  background-color: #1aa090;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.rent-button:hover{
+  background-color: #137c6f;
 }

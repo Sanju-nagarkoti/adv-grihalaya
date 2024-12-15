@@ -11,32 +11,46 @@
 {% endblock css %}
 
 {% block content %}
-<div class="container">
-        
+<div class="container">     
 
 
     <h1>Contact Us</h1>
 
-    <div class="contact-info">
-        <p><i class='bx bx-home'></i> <span>Address:</span> Dekocha, Bhaktapur, Nepal</p>
-        <p><i class='bx bx-phone'></i> <span>Call Us:</span> +977-9841057532</p>
-        <p><i class='bx bx-envelope'></i> <span>Email:</span> grihalayasewa.np@gmail.com</p>
-        <p><i class='bx bx-time'></i> <span>Opening Hours:</span> Sunday - Saturday: 7:00 AM - 6:00 PM</p>
+    <div class="containers">
+        <div class="contact-info">
+            <p><i class='bx bx-home'></i> <span>Address:</span> Lokanthali, Bhaktapur, Nepal</p>
+            <p><i class='bx bx-phone'></i> <span>Call Us:</span> +977-9841057532</p>
+            <p><i class='bx bx-envelope'></i> <span>Email:</span> grihalayasewa.np@gmail.com</p>
+            <p><i class='bx bx-time'></i> <span>Opening Hours:</span> Sunday - Saturday: 7:00 AM - 6:00 PM</p>
+        </div>
+
+        <div class="form-container">
+            <form action="/submit_contact_form" method="POST">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>    
     </div>
-
-    <div class="form-container">
-        <form action="/submit_contact_form" method="POST">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
-
-            <input type="submit" value="Submit">
-        </form>
+</div>
+<div class="map-container">
+    <div style="width: 100%; height: 400px;">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.6372388678036!2d85.33793117505948!3d27.686195731439552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb197914d3cda1%3A0xa2ad5539e7a631e9!2sLokanthali%2C%20Madhyapur%20Thimi%2044600%2C%20Nepal!5e0!3m2!1sen!2snp!4v1698839954321!5m2!1sen!2snp"
+            width="100%"
+            height="400"
+            style="border: 0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 </div>
 
