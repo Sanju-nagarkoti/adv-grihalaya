@@ -6,17 +6,21 @@
     <ul class="navbar">
     <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
     <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
-    <li><a class="{{buying}}" href="{% url "buying" %}">Buying</a></li>
-    <li><a class="{{selling}}" href="{% url "selling" %}">Selling</a></li>
+    <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
+    {% if request.user.is_authenticated %}
+    <li><a class="{{selling}}" href="{% url "register:selling1" request.user.pk %}">Selling</a></li>
+    {% else %}
+    <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
+    {% endif %}
     <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
     </ul>
     <div class="h-btn">
         {% if request.user.is_authenticated %}
-        hello, {{request.user.username}}
-        <a href="{% url "logout" %}">Logout</a>
+        <span class="hello"> Hello, {{request.user.username}} </span>
+        <a href="{% url "register:logout" %}" class="logout">Logout</a>
         {% else %}
-        <a href="{% url "login" %}"  class="h-btn1">Login</a>
-        <a href="{% url "signup" %}"  class="h-btn2">Sign Up</a>
+        <a href="{% url "register:login" %}"  class="h-btn1">Login</a>
+        <a href="{% url "register:signup" %}"  class="h-btn2">Sign Up</a>
         {% endif %}
 
     </div>

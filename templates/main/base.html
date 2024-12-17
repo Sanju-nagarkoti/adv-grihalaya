@@ -11,6 +11,7 @@
     {% block css %}
 
     <link rel=stylesheet href="{% static 'css/mycss.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     
     {% endblock  %}
     
@@ -34,10 +35,14 @@
           <div class="footer-links">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="aboutus/">About Us</a></li>
-              <li><a href="contactus/">Contact</a></li>
-              <li><a href="buy/buying/">Houses for buy</a></li>
-              <li><a href="sell/selling/">Selling properties</a></li>
+              <li><a href="{% url "aboutus" %}">About Us</a></li>
+              <li><a href="{% url "contactus" %}">Contact</a></li>
+              <li><a href="{% url "register:buying" %}">Houses for buy</a></li>
+              {% if request.user.is_authenticated %}
+              <li><a class="{{selling}}" href="{% url "register:selling1" request.user.pk %}">Selling</a></li>
+              {% else %}
+              <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
+              {% endif %}
               
             </ul>
           </div>
@@ -58,6 +63,7 @@
           <p>&copy; 2024 Grihalaya Sewa. All Rights Reserved.</p>
         </div>
       </footer>
-    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+      
 </body>
 </html>

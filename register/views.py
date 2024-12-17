@@ -1,10 +1,13 @@
 from django.contrib import messages
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .forms import RoomForm
+from .models import Room
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 
@@ -42,8 +45,7 @@ def signup_user(request):
         email = request.POST['email']
         password = request.POST['password']
         repassword = request.POST['repassword']
-        address = request.POST['address']
-        phoneno = request.POST['phoneno']
+
         
 
         #Check for empty fields
@@ -83,15 +85,53 @@ def signup_user(request):
     else:
         return render(request, "register/signup.html")
 
-@login_required(login_url='login')
-def buying(request):
-    return render(request,"register/buying.html", {"buying":"active"})
+@login_required(login_url='register:login')  #to visit buying page first login 
+def buying(request): #list room
+    rooms=Room.objects.all()
+    return render(request,"register/room_list.html", {"buying":"active",'rooms':rooms})
 
-@login_required(login_url='login')
-def selling(request):
-    return render(request,"register/selling.html", {"selling":"active"})
+@login_required(login_url='register:login')
+def selling(request,pk):   #insert room
+    rooms=Room.objects.filter(user_id=pk)
+    if request.method == 'POST':
+        form = RoomForm(request.POST, request.FILES)
+        if form.is_valid():
+            room=form.save(commit=False)
+            room.user=request.user
+            form.save()
+            return redirect('register:buying')  # Redirect to a page showing all rooms or a success page
+    else:
+        form = RoomForm()
+    return render(request,"register/room_insert.html", {"selling":"active",'form': form, 'rooms':rooms})
 
+# Room Details View
+def Room_detail(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+    return render(request, 'register/room_detail.html', {'room': room})
 
+# Room Update View
+@login_required(login_url='register:login')
+def Room_update(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+
+    if room.user != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this room.")
+    if request.method == 'POST':
+        form = RoomForm(request.POST, request.FILES, instance=room)
+        if form.is_valid():
+            form.save()     #user is not modified here
+            return redirect('register:room_detail', pk=room.pk)
+    else:
+        form = RoomForm(instance=room)
+    return render(request, 'register/room_update.html', {'form': form, 'room': room})
+
+# Room Delete View
+def Room_delete(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('register:buying')
+    return render(request, 'register/room_delete.html', {'room': room})
 
 
 

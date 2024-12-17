@@ -1,0 +1,59 @@
+    
+    {% extends "main/base.html" %}
+    
+    {% load static %}
+    
+    {% block title %}Selling{% endblock title %}
+    
+    {% block css %}
+    {{ block.super }}
+    {% endblock css %}
+    
+    {% block content %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Room</h1>
+        <div class="row">
+            <!-- Left Column: Add Room Form -->
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+    
+            <!-- Right Column: List of Rooms -->
+            <div class="col-md-6">
+                <h1 class="mb-4">List of My Rooms</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Price</th>
+                            <th>Detail View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for room in rooms %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ room.title }}</td>
+                            <td>{{ room.location }}</td>
+                            <td>{{ room.price }}</td>
+                            <td>
+                                <a href="{% url 'register:room_detail' room.pk %}">Detail</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">No rooms available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

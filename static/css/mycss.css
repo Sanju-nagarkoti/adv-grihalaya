@@ -2,12 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    text-decoration: none;
     list-style: none;
     border: none;
     outline: none;
     scroll-behavior: smooth;
     font-family: 'Work Sans', sans-serif;
+    text-decoration: none;
 }
 
 :root{
@@ -54,6 +54,7 @@ header{
     transition: all .40s ease;
     width: 100%;
     position: relative;
+    text-decoration: none;
 }
 
 
@@ -92,6 +93,19 @@ header{
 }
 .h-btn2:hover{
     transform: translateX(-7px);
+}
+.h-btn .hello{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+.h-btn .logout{
+    color: black;
+    background-color: white;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin: 0 0 0 15px;
+    text-decoration: none;
 }
 #menu-icon{
     color: var(--text_color);
@@ -217,7 +231,7 @@ margin-bottom: 2.5rem;
     text-align: center;
     margin-top: 4rem;
 }
-.btn{
+.cbtn{
     display: inline-block;
     padding: 18px 28px;
     background: var(--main-color);
@@ -225,8 +239,9 @@ margin-bottom: 2.5rem;
     font-size: 17px;
     font-weight: 500;
     transition: all .50s ease;
+    text-decoration: none;
 }
-.btn:hover{
+.cbtn:hover{
     transform: translateY(-7px) scale(0.9);
 }
 .about{
@@ -278,14 +293,15 @@ footer {
     color: black;
     padding: 20px 0;
     text-align: center;
+    margin-top: 20px;
   }
   
   .footer-container {
     display: flex;
-    justify-content: space-evenlys;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     /* max-width: 1200px; */
-    margin: 0 auto;
+    margin: 0px auto;
     padding: 0 0;
   }
   
@@ -306,6 +322,9 @@ footer {
     text-decoration: none;
   }
   
+  .footer-links a {
+    text-decoration: none;
+  }
   .footer-links a:hover {
     text-decoration: underline;
   }
@@ -315,3 +334,8 @@ footer {
     font-size: 14px;
   }
   
+  .thumbnail {
+    max-width: 200px;
+    max-height: 150px;
+    cursor: pointer;
+}

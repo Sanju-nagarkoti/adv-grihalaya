@@ -26,7 +26,8 @@ urlpatterns = [
     path('home/',views.home),
     path('aboutus/',views.aboutus,name="aboutus"),
     path('contactus/',views.contactus,name="contactus"),
-    path('register/',include("register.urls")),
+    # path('register/',include('register.urls',namespace='register')),
+    path('register/', include('register.urls', namespace='register')),
     
 ]
 if settings.DEBUG:

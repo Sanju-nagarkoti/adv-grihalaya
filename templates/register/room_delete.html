@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %}Delete_Room{% endblock title %}
+
+{% block css %}
+
+{{ block.super }}
+
+{% endblock css %} 
+
+
+
+{% block content %}
+
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Delete Room</h1>
+    <p>Are you sure you want to delete the room: <strong>{{ room.title }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'register:room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock content %}
+
+
+
