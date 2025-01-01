@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,6 +105,19 @@
         </form>
         <a href="{% url "register:signup" %}" class="register-link">Don't have an account? Register Now</a>
     </div>
+<!-- Check for messages -->
+{% if messages %}
+    <script>
+        {% for message in messages %}
+            Swal.fire({
+                title: '{% if message.tags == "error" %}Error{% else %}Success{% endif %}',
+                text: '{{ message }}',
+                icon: '{% if message.tags == "error" %}error{% else %}success{% endif %}',
+                confirmButtonText: 'OK'
+            });
+        {% endfor %}
+    </script>
+{% endif %}
         
     </div>
 </body>

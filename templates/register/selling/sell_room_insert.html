@@ -43,7 +43,7 @@
                             <td>{{ room.location }}</td>
                             <td>{{ room.price }}</td>
                             <td>
-                                <a href="{% url 'register:room_detail' room.pk %}">Detail</a>
+                                <a href="{% url 'register:sell_room_detail' room.pk %}">Detail</a>
                             </td>
                         </tr>
                         {% empty %}

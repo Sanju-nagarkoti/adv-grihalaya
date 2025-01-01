@@ -5,9 +5,11 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RoomForm
-from .models import Room
+from .forms import RoomForm, CommentForm
+from .models import Room, Comment
 from django.http import HttpResponseForbidden
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -19,7 +21,7 @@ def login_user(request):
         #Check for empty fields
         if not login_username or not login_password:
             messages.error(request, 'All fields are required')
-            return redirect('/register/login/')
+            return redirect('register:login')
 
         #Login
         user = authenticate(request, username = login_username, password = login_password)
@@ -28,13 +30,13 @@ def login_user(request):
             return redirect('/home/')
         else:
             messages.error(request, "Invalid username or password")
-            return redirect('/register/login/')
+            return redirect('register:login')
     else:
         return render(request,"register/login.html")
     
 def logout_user(request):
     logout(request)
-    return redirect('/register/login/')
+    return redirect('register:login')
     
 def signup_user(request):
     if request.method == "POST":
@@ -85,11 +87,7 @@ def signup_user(request):
     else:
         return render(request, "register/signup.html")
 
-@login_required(login_url='register:login')  #to visit buying page first login 
-def buying(request): #list room
-    rooms=Room.objects.all()
-    return render(request,"register/room_list.html", {"buying":"active",'rooms':rooms})
-
+# Selling
 @login_required(login_url='register:login')
 def selling(request,pk):   #insert room
     rooms=Room.objects.filter(user_id=pk)
@@ -102,16 +100,16 @@ def selling(request,pk):   #insert room
             return redirect('register:buying')  # Redirect to a page showing all rooms or a success page
     else:
         form = RoomForm()
-    return render(request,"register/room_insert.html", {"selling":"active",'form': form, 'rooms':rooms})
+    return render(request,"register/selling/sell_room_insert.html", {"selling":"active",'form': form, 'rooms':rooms})
 
 # Room Details View
-def Room_detail(request, pk):
+def Sell_Room_detail(request, pk):
     room = get_object_or_404(Room, pk=pk)
-    return render(request, 'register/room_detail.html', {'room': room})
+    return render(request, 'register/selling/sell_room_detail.html', {'room': room, "selling":"active"})
 
 # Room Update View
 @login_required(login_url='register:login')
-def Room_update(request, pk):
+def Sell_Room_update(request, pk):
     room = get_object_or_404(Room, pk=pk)
 
     if room.user != request.user:
@@ -120,19 +118,67 @@ def Room_update(request, pk):
         form = RoomForm(request.POST, request.FILES, instance=room)
         if form.is_valid():
             form.save()     #user is not modified here
-            return redirect('register:room_detail', pk=room.pk)
+            return redirect('register:sell_room_detail', pk=room.pk)
     else:
         form = RoomForm(instance=room)
-    return render(request, 'register/room_update.html', {'form': form, 'room': room})
+    return render(request, 'register/selling/sell_room_update.html', {'form': form, 'room': room})
 
 # Room Delete View
-def Room_delete(request, pk):
+def Sell_Room_delete(request, pk):
     room = get_object_or_404(Room, pk=pk)
     if request.method == 'POST':
         room.delete()
         return redirect('register:buying')
-    return render(request, 'register/room_delete.html', {'room': room})
+    return render(request, 'register/selling/sell_room_delete.html', {'room': room})
 
+# Buying
+@login_required(login_url='register:login')  #to visit buying page first login 
+def buying(request): #list room
+    rooms=Room.objects.all()
+    return render(request,"register/buying/buy_room_list.html", {"buying":"active",'rooms':rooms})
+
+# Room Details View
+def Buy_Room_detail(request, pk):
+    room = get_object_or_404(Room, pk=pk)  # Fetch the room by its primary key
+    comments = room.comments.all()  # Fetch related comments
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            # Email Logic
+            subject = "Message from Grihalaya"
+            message = request.POST['content']
+            from_email = "sanjunagarkoti44@gmail.com"  # Your sender email
+            recipient_list = [room.seller_email]  # Seller's email from the Room object
+            user_email = request.user.email if request.user.is_authenticated else "Anonymous"
+
+            # Render message template
+            email_message = render_to_string('register/message.html', {
+                'name': room.seller_name,
+                'message': message,
+                'user_email': user_email,  # Include user email in the context
+            })
+
+            # Send the email
+            send_mail(subject, email_message, from_email, recipient_list, fail_silently=False)
+
+            # Save the comment
+            comment = form.save(commit=False)
+            comment.room = room  # Associate the comment with the room
+            comment.user = request.user if request.user.is_authenticated else None
+            comment.save()
+
+            # Redirect after processing
+            return redirect('register:buy_room_detail', pk=room.pk)
+    else:
+        form = CommentForm()
+
+    return render(request, 'register/buying/buy_room_detail.html', {
+        'room': room,
+        "buying": "active",
+        'comments': comments,
+        'form': form
+    })
 
 
 

@@ -20,7 +20,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="{% url 'register:room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'register:sell_room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 

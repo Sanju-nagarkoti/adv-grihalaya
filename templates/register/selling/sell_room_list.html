@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Buying{% endblock title %}
+{% block title %}Selling{% endblock title %}
 
 {% block css %}
 
@@ -44,7 +44,7 @@
                     </td>
                     <td>{{ room.description }}</td>
                     <td>
-                        <a href="{% url "register:room_detail" room.pk %}">View</a>
+                        <a href="{% url "register:sell_room_detail" room.pk %}">View</a>
                     </td>
                 </tr>
                 {% empty %}

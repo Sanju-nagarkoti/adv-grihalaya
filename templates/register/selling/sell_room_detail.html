@@ -29,8 +29,8 @@
             <p>No image available.</p>
             {% endif %}
 
-            <a href="{% url 'register:room_update' room.pk %}" class="btn btn-warning mt-3">Edit</a>
-            <a href="{% url 'register:room_delete' room.pk %}" class="btn btn-danger mt-3">Delete</a>
+            <a href="{% url 'register:sell_room_update' room.pk %}" class="btn btn-warning mt-3">Edit</a>
+            <a href="{% url 'register:sell_room_delete' room.pk %}" class="btn btn-danger mt-3">Delete</a>
         </div>
 
         <!-- Right Column (Seller Information) -->

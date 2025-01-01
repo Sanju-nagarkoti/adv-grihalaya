@@ -4,15 +4,15 @@
         <img src="{% static 'photos/logo.jpg' %}" alt="">
     </a>
     <ul class="navbar">
-    <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
-    <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
-    <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
-    {% if request.user.is_authenticated %}
-    <li><a class="{{selling}}" href="{% url "register:selling1" request.user.pk %}">Selling</a></li>
-    {% else %}
-    <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
-    {% endif %}
-    <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
+        <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
+        <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
+        <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a class="{{selling}}" href="{% url "register:selling" request.user.pk %}">Selling</a></li>
+        {% else %}
+        <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
+        {% endif %}
+        <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
     </ul>
     <div class="h-btn">
         {% if request.user.is_authenticated %}

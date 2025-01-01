@@ -1,0 +1,90 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %}Detail_Room{% endblock title %}
+
+{% block css %}
+{{ block.super }}
+{% endblock css %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left Column (Room Details) -->
+        <div class="col-md-6">
+            <h1 class="mb-4">{{ room.title }}</h1>
+            <p><strong>Location:</strong> {{ room.location }}</p>
+            <p><strong>Price:</strong> {{ room.price }}</p>
+            <p><strong>Description:</strong> {{ room.description }}</p>
+
+            {% if room.image %}
+            <div class="text-left">
+                <!-- Responsive Thumbnail -->
+                <img src="{{ room.image.url }}" alt="Room Image" class="img-thumbnail img-fluid" 
+                    style="max-width: 300px; cursor: pointer;" 
+                    data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            {% else %}
+            <p>No image available.</p>
+            {% endif %}
+{% comment %} 
+            <a href="{% url 'register:room_update' room.pk %}" class="btn btn-warning mt-3">Edit</a>
+            <a href="{% url 'register:room_delete' room.pk %}" class="btn btn-danger mt-3">Delete</a> {% endcomment %}
+        </div>
+
+        <!-- Right Column (Seller Information) -->
+        <div class="col-md-6">
+            <h3 class="mt-4">Seller Information</h3>
+            <p><strong>Name:</strong> {{ room.seller_name }}</p>
+            <p><strong>Address:</strong> {{ room.seller_address }}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{ room.seller_email }}">{{ room.seller_email }}</a></p>
+            <p><strong>Phone:</strong> {{ room.seller_phone }}</p>
+            <p><strong>Status:</strong> {{ room.status|capfirst }}</p>
+        </div>
+    </div>
+
+    <h2>Comments</h2>
+<ul>
+    {% for comment in comments %}
+        <li>
+            <strong>
+                {% if comment.user %}
+                    {{ comment.user.username }}
+                {% else %}
+                    Anonymous
+                {% endif %}
+            </strong>
+            {{ comment.content }}
+            <small>{{ comment.created_at }}</small>
+        </li>
+    {% empty %}
+        <li>No comments yet. Be the first to comment!</li>
+    {% endfor %}
+</ul>
+
+<h3>Add a Comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+    <!-- Modal for Enlarged Image -->
+    {% if room.image %}
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">{{ room.title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ room.image.url }}" alt="Room Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
