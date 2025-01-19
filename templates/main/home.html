@@ -3,93 +3,66 @@
 {% load static %}
 
 {% block content %}
-<section class="home">
-    <div class="home-text">
-        <h1>Live in your dream home!</h1>
-        <p>Home is the dream of every person where they not only stay but create a beautiful memory and attachments.Grihalaya Sewa is the online platform where every person can find a dream home.</p>
 
-    <div class="h-search">
-        <form>
-            <input type="search" placeholder="Search by location..." class="search-input">
-            <input type="submit" value="Search">
-        </form>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Live in your dream home!</h1>
+            <p>Home is the dream of every person where they not only stay but create a beautiful memory and attachments.Grihalaya Sewa is the online platform where every person can find a dream home.</p>
+        </div>
+        <div class="hero-img">
+            <img src="{% static 'photos/home.png' %}" alt="" >
+        </div>
     </div>
-    </div>
-    <div class="home-img">
-        <img src="{% static 'photos/home.png' %}" alt="">
-    </div>
-  </section>
 
    <!-- property section -->
     <section class="property">
-        <div class="center-left">
             <h2>Popular Residence</h2>
-        </div>
         <div class="property-content">
+                <div class="row">
+                    <div class="img-holder">
+                        <img src="{% static 'photos/house.jpg' %}" alt="" >
+                    </div>
+                    <p>Sipadol,Bhaktaur</p>
+                    <div class="list">
+                        <a href="#"><i class='bx bx-bed'>4 Bed</i></a>
+                        <a href="#"><i class='bx bx-bath'>2 Bath</i></a>
+                        <a href="#"><i class='bx bx-shape-square'> 1203 sqft</i></a>
+                    </div>                
+                </div>
             <div class="row">
                 <div class="img-holder">
-                    <img src="{% static 'photos/house.jpg' %}" alt="">
-                </div>
-                <p>Sipadol,Bhaktaur</p>
-                <div class="list">
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bed'>4 Bed</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bath'>2 Bath</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-shape-square'> 1203 sqft</i>                      
-                    </a>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img-holder">
-                    <img src="{% static 'photos/h2.jpg' %}" alt="">
+                    <img src="{% static 'photos/h2.jpg' %}" alt="" >
                 </div>
                 <p>Lokanthali,Bhaktapur</p>
                 <div class="list">
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bed'>8 Bed</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bath'>6 Bath</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-shape-square'>1909 sqft</i>                       
-                    </a>
+                    <a href="#"><i class='bx bx-bed'>8 Bed</i> </a>
+                    <a href="#"><i class='bx bx-bath'>6 Bath</i> </a>
+                    <a href="#"><i class='bx bx-shape-square'>1909 sqft</i></a>
                 </div>
                 
             </div>
             <div class="row">
                 <div class="img-holder">
-                    <img src="{% static 'photos/h3.jpg' %}" alt="">
+                    <img src="{% static 'photos/h3.jpg' %}" alt="" >
                 </div>
                 <p>Dekocha,Bhaktapur</p>
                 <div class="list">
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bed'>10 Bed</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-bath'>5 Bath</i>                        
-                    </a>
-                    <a href="#" class="Residence-List">
-                        <i class='bx bx-shape-square'>1203 sqft</i>                       
-                    </a>
-                </div>
-                
+                    <a href="#"><i class='bx bx-bed'>10 Bed</i> </a>
+                    <a href="#"><i class='bx bx-bath'>5 Bath</i> </a>
+                    <a href="#"><i class='bx bx-shape-square'>1203 sqft</i></a>
+                </div>                
             </div>
         </div>
+    </section>
         <div class="center-btn">
             <a href="{% url "register:buying" %}" class="cbtn">View All Properties</a>
         </div>
-    </section>
+    
 
     <!-- about section -->
      <section class="about">
         <div class="about-img">
-            <img src="{% static 'photos/Group 1.png' %}" alt="">
+            <img src="{% static 'photos/Group 1.png' %}" alt="" >
 
         </div>
         <div class="about-text">
@@ -97,13 +70,14 @@
             <p>Grihalaya Sewa is the online websites designed to solve the problem of every person trying to find a reliable home and landlords to rent a house. This website mainly focuses on connecting landlords and renters.The objective of Grihalaya Sewa is to create a user-friendly home rental platform that streamlines the process of renting properties, providing both landlords and tenants with a reliable, accessible, and transparent digital solution.</p>
             <a href="{% url "contactus" %}" class="cbtn">Get In Touch</a>
         </div>
-     </section>
+    </section>
      <!-- subbscribe -->
-      <section class="Subscribe">
+        <section class="Subscribe">
         <div class="Subscribe-content">
             <h2>Let's Simply Being With Rentiz</h2>
             <p>Grihalaya Sewa project aims to develop a sophisticated rental platform with powerful algorithms for personalized matching, dynamic pricing, and vacancy prediction, thereby streamlining the rental process for both tenants and landlords. </p>
             <a href="{% url "home" %}" class="cbtn">Get Started</a>
         </div>
-      </section>
+        </section>
+
 {% endblock content %}

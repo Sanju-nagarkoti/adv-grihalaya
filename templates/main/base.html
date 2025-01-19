@@ -10,26 +10,25 @@
     </title>
     {% block css %}
 
-    <link rel=stylesheet href="{% static 'css/mycss.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel=stylesheet href="{% static 'css/mycss2.css' %}">
     
     
     {% endblock  %}
     
-    <!-- box icons -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <!-- google fonts links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   
 </head>
 <body>
    {% include "main/navbar.html" %}
    
+   <div class="container">
      {% block content %}{% endblock content %}
-     
+    </div>
      
      {% comment %} footer section {% endcomment %}
      <footer>
@@ -42,7 +41,7 @@
               <li><a href="{% url "contactus" %}">Contact</a></li>
               <li><a href="{% url "register:buying" %}">Houses for buy</a></li>
               {% if request.user.is_authenticated %}
-              <li><a class="{{selling}}" href="{% url "register:selling" request.user.pk %}">Selling</a></li>
+              <li><a  href="{% url "register:selling" request.user.pk %}">Selling</a></li>
               {% comment %} {% else %}
               <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li> {% endcomment %}
               {% endif %}
@@ -66,8 +65,9 @@
           <p>&copy; 2024 Grihalaya Sewa. All Rights Reserved.</p>
         </div>
       </footer>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
       
 </body>
 </html>

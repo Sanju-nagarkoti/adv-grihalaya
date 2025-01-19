@@ -1,28 +1,35 @@
 {% load static %}
+<div class="bg-header">
+<div class="container">
 <header>
-    <a href="#" class="logo">
-        <img src="{% static 'photos/logo.jpg' %}" alt="">
-    </a>
-    <ul class="navbar">
-        <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
-        <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
-        <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
-        {% if request.user.is_authenticated %}
-        <li><a class="{{selling}}" href="{% url "register:selling" request.user.pk %}">Selling</a></li>
-        {% else %}
-        <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
-        {% endif %}
-        <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
-    </ul>
+    <div class="logo">
+        <a href="#" > Grihalaya</a>
+    </div>
+    <nav class="navbar">
+        <ul >
+            <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
+            <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
+            <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a class="{{selling}}" href="{% url "register:selling" request.user.pk %}">Selling</a></li>
+            {% else %}
+            <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
+            {% endif %}
+            <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
+        </ul>
+    </nav>
+
     <div class="h-btn">
         {% if request.user.is_authenticated %}
         <span class="hello"> Hello, {{request.user.username}} </span>
-        <a href="{% url "register:logout" %}" class="logout">Logout</a>
+        <a href="{% url "register:logout" %}" class="btn-logout">Logout</a>
         {% else %}
-        <a href="{% url "register:login" %}"  class="h-btn1">Login</a>
-        <a href="{% url "register:signup" %}"  class="h-btn2">Sign Up</a>
+        <a href="{% url "register:login" %}"  class="btn-login">Login</a>
+        <a href="{% url "register:signup" %}"  class="btn-signup">Sign Up</a>
         {% endif %}
 
     </div>
  </header>
+</div>
+</div>
  

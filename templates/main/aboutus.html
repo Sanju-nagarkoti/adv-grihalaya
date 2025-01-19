@@ -7,8 +7,6 @@
 
 {{ block.super }}
 
-<link rel="stylesheet" href="{% static "css/aboutus.css" %}">
-
 {% endblock css %}
 
 
@@ -16,6 +14,10 @@
 {% block content %}
 
 <section>
+    <div class="wrapper">
+    <h2>About Us</h2>
+    <p>We help people to find a reliable place!</p>
+     </div>
 
     <div class="wrapper1">
     
@@ -24,22 +26,19 @@
         </div>
     
         <div class="content1">
-            <h2>About Us</h2>
-            <p>At Grihalaya Sewa, we are dedicated to providing high-quality, comfortable, and affordable rental homes to our clients. Our mission is to make the process of finding a rental home as seamless and stress-free as possible. Whether you're looking for a cozy apartment or a spacious house, we have a variety of options to meet your needs.</p><br>
-            <p>Founded with the vision of simplifying the housing rental market, Grihalaya Sewa offers a wide range of properties, from city apartments to family homes in suburban areas. We pride ourselves on our exceptional customer service, ensuring that every client feels supported throughout their rental journey.</p><br>
+            <p>At Grihalaya Sewa, we are dedicated to providing high-quality, comfortable, and affordable rental homes to our clients. Our mission is to make the process of finding a rental home as seamless and stress-free as possible. Whether you're looking for a cozy apartment or a spacious house, we have a variety of options to meet your needs.</p>
+            <p>Founded with the vision of simplifying the housing rental market, Grihalaya Sewa offers a wide range of properties, from city apartments to family homes in suburban areas. We pride ourselves on our exceptional customer service, ensuring that every client feels supported throughout their rental journey.</p>
     
             <p>We believe that finding a place to live should be an exciting and positive experience. That's why we've created a platform where landlords and renters can connect easily, browse available properties, and make informed decisions.</p>
         </div>
     
     </div>
     
-    </div>
     
-    
-        <div class="wrapper1">
+    <div class="wrapper1">
             <div class="content1">
                 <h2>Our Mission</h2>
-                <p>Our mission is simple to identify i.e. what you are searching for and provide withbest solution and match. Whether it’s your first house purchase, selling, renting, or just learning about real estate, we are here to assist you in every step.</p><br>
+                <p>Our mission is simple to identify i.e. what you are searching for and provide withbest solution and match. Whether it’s your first house purchase, selling, renting, or just learning about real estate, we are here to assist you in every step.</p>
     
                 <p>
                     <ul>
@@ -51,9 +50,9 @@
                 
             </div>
             <div class="image2">
-                <img src="{% static 'photos/h2.jpg' %}" alt="">
+                <img src="{% static 'photos/house4.jpg' %}" alt="">
             </div>
-        </div>
+    </div>
 </section>
 
 {% endblock content %}
