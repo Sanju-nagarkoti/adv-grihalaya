@@ -1,31 +1,34 @@
+# models.py
 from django.db import models
-from django.contrib.auth.models import User  # Import the User model
+from django.contrib.auth.models import User
 
-
-# selling page form
 class Room(models.Model):
-    title = models.CharField(max_length=200)  # Title of the room listing
-    location = models.CharField(max_length=255)  # Location of the room
-    price = models.CharField(max_length=255)  # Price for renting the room
-    image = models.ImageField(upload_to='room_images/')  # Image of the room
-    description = models.TextField()  # Description of the room
-
-    # Seller's information
-    seller_name = models.CharField(max_length=255)  # Seller's name
-    seller_address = models.TextField()  # Seller's address
-    seller_email = models.EmailField()  # Seller's email
-    seller_phone = models.CharField(max_length=15)  # Seller's phone number
+    title = models.CharField(max_length=200)
+    location = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+    description = models.TextField()
+    seller_name = models.CharField(max_length=255)
+    seller_address = models.TextField()
+    seller_email = models.EmailField()
+    seller_phone = models.CharField(max_length=15)
     status = models.CharField(
         max_length=50,
         choices=[('available', 'Available'), ('sold', 'Sold')],
         default='available'
-    )  # Room status
-
-    # Link to the User model
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rooms', null=True, blank=True)  
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rooms', null=True, blank=True)
 
     def __str__(self):
-        return self.title  # To represent table with the room title
+        return self.title
+
+
+class RoomImage(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='room_images/')
+
+    def __str__(self):
+        return f"Image for {self.room.title}"
+    
     
 class Comment(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='comments')  # Link to the Room

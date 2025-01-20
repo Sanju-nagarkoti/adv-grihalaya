@@ -17,18 +17,30 @@
             <p><strong>Location:</strong> {{ room.location }}</p>
             <p><strong>Price:</strong> {{ room.price }}</p>
             <p><strong>Description:</strong> {{ room.description }}</p>
-
-            {% if room.image %}
+        
+            {% if images %}
             <div class="text-left">
-                <!-- Responsive Thumbnail -->
-                <img src="{{ room.image.url }}" alt="Room Image" class="img-thumbnail img-fluid" 
-                    style="max-width: 300px; cursor: pointer;" 
-                    data-bs-toggle="modal" data-bs-target="#imageModal">
+                {% for image in images %}
+                <!-- Responsive Thumbnail for Each Image -->
+                <img src="{{ image.image.url }}" alt="Room Image" class="img-thumbnail img-fluid"
+                    style="max-width: 300px; margin-bottom: 10px; cursor: pointer;"
+                    data-bs-toggle="modal" data-bs-target="#imageModal{{ forloop.counter }}">
+                <!-- Modal for Each Image -->
+                <div class="modal fade" id="imageModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="imageModalLabel{{ forloop.counter }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="{{ image.image.url }}" alt="Room Image" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
             {% else %}
-            <p>No image available.</p>
+            <p>No images available.</p>
             {% endif %}
-
+        
             <a href="{% url 'register:sell_room_update' room.pk %}" class="btn btn-warning mt-3">Edit</a>
             <a href="{% url 'register:sell_room_delete' room.pk %}" class="btn btn-danger mt-3">Delete</a>
         </div>

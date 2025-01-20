@@ -17,6 +17,8 @@ urlpatterns = [
     path('buy/',views.buying,name="buying"),#room_list
     path('buy_room_detail/<int:pk>/',views.Buy_Room_detail,name="buy_room_detail"),
     
+    path('delete-room-image/<int:image_pk>/', views.delete_room_image, name='delete_room_image'),
+    
 
  
 ]

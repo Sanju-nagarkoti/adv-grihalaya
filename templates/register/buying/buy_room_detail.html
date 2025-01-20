@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Detail_Room{% endblock title %}
+{% block title %}Buying{% endblock title %}
 
 {% block css %}
 {{ block.super }}
@@ -18,17 +18,20 @@
             <p><strong>Price:</strong> {{ room.price }}</p>
             <p><strong>Description:</strong> {{ room.description }}</p>
 
-            {% if room.image %}
+            {% if room.images.all %}
             <div class="text-left">
-                <!-- Responsive Thumbnail -->
-                <img src="{{ room.image.url }}" alt="Room Image" class="img-thumbnail img-fluid" 
-                    style="max-width: 300px; cursor: pointer;" 
-                    data-bs-toggle="modal" data-bs-target="#imageModal">
+                <!-- Display all images -->
+                <div class="d-flex flex-wrap">
+                    {% for image in room.images.all %}
+                    <img src="{{ image.image.url }}" alt="Room Image" class="img-thumbnail img-fluid m-1" 
+                        style="max-width: 150px; cursor: pointer;" 
+                        data-bs-toggle="modal" data-bs-target="#imageModal-{{ forloop.counter }}">
+                    {% endfor %}
+                </div>
             </div>
             {% else %}
-            <p>No image available.</p>
+            <p>No images available.</p>
             {% endif %}
-
         </div>
 
         <!-- Right Column (Seller Information) -->
@@ -42,47 +45,48 @@
         </div>
     </div>
 
+    <!-- Comments Section -->
     <h2>Comments</h2>
-<ul>
-    {% for comment in comments %}
+    <ul>
+        {% for comment in comments %}
         <li>
             <strong>
                 {% if comment.user %}
-                    {{ comment.user.username }}
+                {{ comment.user.username }}
                 {% else %}
-                    Anonymous
+                Anonymous
                 {% endif %}
             </strong>
             {{ comment.content }}
             <small>{{ comment.created_at }}</small>
         </li>
-    {% empty %}
+        {% empty %}
         <li>No comments yet. Be the first to comment!</li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
 
-<h3>Add a Comment</h3>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <h3>Add a Comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-    <!-- Modal for Enlarged Image -->
-    {% if room.image %}
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <!-- Modals for Enlarged Images -->
+    {% for image in room.images.all %}
+    <div class="modal fade" id="imageModal-{{ forloop.counter }}" tabindex="-1" aria-labelledby="imageModalLabel-{{ forloop.counter }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">{{ room.title }}</h5>
+                    <h5 class="modal-title" id="imageModalLabel-{{ forloop.counter }}">{{ room.title }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="{{ room.image.url }}" alt="Room Image" class="img-fluid">
+                    <img src="{{ image.image.url }}" alt="Room Image" class="img-fluid">
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
+    {% endfor %}
 </div>
 {% endblock content %}

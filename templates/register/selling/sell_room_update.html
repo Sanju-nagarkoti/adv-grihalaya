@@ -13,18 +13,36 @@
 
 
 {% block content %}
-
 <div class="container mt-5">
     <h1 class="mb-4">Update Room: {{ room.title }}</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
+        <!-- Multiple Image Upload -->
+        <div class="mb-3">
+            <label for="images" class="form-label">Upload Images:</label>
+            <input type="file" name="images" id="images" class="form-control" multiple>
+        </div>
+
         <button type="submit" class="btn btn-primary">Save Changes</button>
         <a href="{% url 'register:sell_room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
     </form>
+
+    <!-- Display Existing Images -->
+    <h3 class="mt-4">Existing Images</h3>
+    <div class="d-flex flex-wrap">
+        {% for image in room.images.all %}
+        <div class="m-2">
+            <img src="{{ image.image.url }}" alt="Room Image" class="img-thumbnail" style="max-width: 150px;">
+            <form method="post" action="{% url 'register:delete_room_image' image.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-
 {% endblock content %}
-
 
 

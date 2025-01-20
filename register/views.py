@@ -5,11 +5,13 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RoomForm, CommentForm
-from .models import Room, Comment
+from .forms import RoomForm, CommentForm, RoomImageForm
+from .models import Room, Comment, RoomImage
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.db import transaction
+
 
 # Create your views here.
 
@@ -88,24 +90,40 @@ def signup_user(request):
         return render(request, "register/signup.html")
 
 # Selling
+# views.py
 @login_required(login_url='register:login')
-def selling(request,pk):   #insert room
-    rooms=Room.objects.filter(user_id=pk)
+def selling(request, pk):
+    rooms = Room.objects.filter(user_id=pk)
     if request.method == 'POST':
-        form = RoomForm(request.POST, request.FILES)
+        form = RoomForm(request.POST)
+        images = request.FILES.getlist('image')  # Retrieve multiple files
         if form.is_valid():
-            room=form.save(commit=False)
-            room.user=request.user
-            form.save()
-            return redirect('register:buying')  # Redirect to a page showing all rooms or a success page
+            room = form.save(commit=False)
+            room.user = request.user
+            room.save()
+
+            # Save each uploaded image
+            for image in images:
+                RoomImage.objects.create(room=room, image=image)
+
+            return redirect('register:buying')
     else:
         form = RoomForm()
-    return render(request,"register/selling/sell_room_insert.html", {"selling":"active",'form': form, 'rooms':rooms})
+    return render(request, "register/selling/sell_room_insert.html", {
+        "selling": "active",
+        'form': form,
+        'rooms': rooms
+    })
 
 # Room Details View
+@login_required(login_url='register:login')
 def Sell_Room_detail(request, pk):
     room = get_object_or_404(Room, pk=pk)
-    return render(request, 'register/selling/sell_room_detail.html', {'room': room, "selling":"active"})
+    images = room.images.all()  # Retrieve all images related to the room
+    return render(request, 'register/selling/sell_room_detail.html', {
+        'room': room,
+        'images': images
+    })
 
 # Room Update View
 @login_required(login_url='register:login')
@@ -114,14 +132,27 @@ def Sell_Room_update(request, pk):
 
     if room.user != request.user:
         return HttpResponseForbidden("You are not allowed to edit this room.")
+
     if request.method == 'POST':
         form = RoomForm(request.POST, request.FILES, instance=room)
+        images = request.FILES.getlist('images')  # Get all uploaded images
+
         if form.is_valid():
-            form.save()     #user is not modified here
+            with transaction.atomic():  # Ensure atomic save for room and images
+                updated_room = form.save()
+
+                # Add new images to the room
+                for image in images:
+                    RoomImage.objects.create(room=updated_room, image=image)
+
             return redirect('register:sell_room_detail', pk=room.pk)
     else:
         form = RoomForm(instance=room)
-    return render(request, 'register/selling/sell_room_update.html', {'form': form, 'room': room})
+
+    return render(request, 'register/selling/sell_room_update.html', {
+        'form': form,
+        'room': room,
+    })
 
 # Room Delete View
 def Sell_Room_delete(request, pk):
@@ -132,20 +163,21 @@ def Sell_Room_delete(request, pk):
     return render(request, 'register/selling/sell_room_delete.html', {'room': room})
 
 # Buying
-@login_required(login_url='register:login')  #to visit buying page first login 
-def buying(request): #list room
-    rooms=Room.objects.all()
-    return render(request,"register/buying/buy_room_list.html", {"buying":"active",'rooms':rooms})
+@login_required(login_url='register:login')  # to visit buying page, first login
+def buying(request):  # list room
+    rooms = Room.objects.prefetch_related('images').all()  # Efficiently fetch rooms with related images
+    return render(request, "register/buying/buy_room_list.html", {"buying": "active", 'rooms': rooms})
 
 # Room Details View
 def Buy_Room_detail(request, pk):
-    room = get_object_or_404(Room, pk=pk)  # Fetch the room by its primary key
+    # Fetch the room with its related images
+    room = get_object_or_404(Room.objects.prefetch_related('images'), pk=pk)
     comments = room.comments.all()  # Fetch related comments
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            # Email Logic
+            # Email logic
             subject = "Message from Grihalaya"
             message = request.POST['content']
             from_email = "sanjunagarkoti44@gmail.com"  # Your sender email
@@ -179,6 +211,16 @@ def Buy_Room_detail(request, pk):
         'comments': comments,
         'form': form
     })
+
+@login_required(login_url='register:login')
+def delete_room_image(request, image_pk):
+    image = get_object_or_404(RoomImage, pk=image_pk)
+
+    if image.room.user != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this image.")
+
+    image.delete()
+    return redirect('register:sell_room_update', pk=image.room.pk)
 
 
 

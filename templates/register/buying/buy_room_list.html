@@ -5,59 +5,53 @@
 {% block title %}Buying{% endblock title %}
 
 {% block css %}
-
 {{ block.super }}
-
-{% endblock css %} 
-
-
+{% endblock css %}
 
 {% block content %}
-
-    <div class="container mt-5">
-        <h1 class="mb-4">List of Rooms</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Location</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for room in rooms %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ room.title }}</td>
-                    <td>{{ room.location }}</td>
-                    <td>{{ room.price }}</td>
-                    <td>
-                        {% if room.image %}
-                        <img src="{{ room.image.url }}" alt="Room Image" style="width: 100px; height: auto;">
-                        {% else %}
-                        No image
-                        {% endif %}
-                    </td>
-                    <td>{{ room.description }}</td>
-                    <td>
-                        <a href="{% url "register:buy_room_detail" room.pk %}">View</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="6" class="text-center">No rooms available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-
+<div class="container mt-5">
+    <h1 class="mb-4">List of Rooms</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Images</th>
+                <th>Description</th>
+                <th>Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ room.title }}</td>
+                <td>{{ room.location }}</td>
+                <td>{{ room.price }}</td>
+                <td>
+                    {% if room.images.all %}
+                    <div>
+                        {% for image in room.images.all %}
+                        <img src="{{ image.image.url }}" alt="Room Image" style="width: 100px; height: auto; margin-right: 10px;">
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    No images
+                    {% endif %}
+                </td>
+                <td>{{ room.description }}</td>
+                <td>
+                    <a href="{% url 'register:buy_room_detail' room.pk %}">View</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No rooms available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
-
-
-

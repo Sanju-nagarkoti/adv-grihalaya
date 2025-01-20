@@ -15,11 +15,16 @@
         <div class="row">
             <!-- Left Column: Add Room Form -->
             <div class="col-md-6">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <!-- sell_room_insert.html -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-group">
+                    <label for="id_image">Images</label>
+                    <input type="file" name="image" id="id_image" class="form-control" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
             </div>
     
             <!-- Right Column: List of Rooms -->
@@ -35,23 +40,31 @@
                             <th>Detail View</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {% for room in rooms %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ room.title }}</td>
-                            <td>{{ room.location }}</td>
-                            <td>{{ room.price }}</td>
-                            <td>
-                                <a href="{% url 'register:sell_room_detail' room.pk %}">Detail</a>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-center">No rooms available.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+                   <!-- sell_room_insert.html -->
+                <tbody>
+                    {% for room in rooms %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ room.title }}</td>
+                        <td>{{ room.location }}</td>
+                        <td>{{ room.price }}</td>
+                        <td>
+                            <a href="{% url 'register:sell_room_detail' room.pk %}">Detail</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            {% for image in room.images.all %}
+                            <img src="{{ image.image.url }}" alt="Room Image" style="width: 100px; height: auto; margin: 5px;">
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No rooms available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                 </table>
             </div>
         </div>
