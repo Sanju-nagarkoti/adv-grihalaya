@@ -1,9 +1,13 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
-app_name='register'
+
+app_name='registration'
 
 urlpatterns = [
+    path('',views.profile,name="profile"),
+    path('profile/',views.profile),
     path('login/',views.login_user,name="login"),
     path('logout/',views.logout_user,name="logout"),
     path('signup/',views.signup_user,name="signup"),
@@ -19,6 +23,6 @@ urlpatterns = [
     
     path('delete-room-image/<int:image_pk>/', views.delete_room_image, name='delete_room_image'),
     
-
+    
  
 ]

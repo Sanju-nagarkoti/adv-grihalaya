@@ -73,13 +73,27 @@
         .login-container button[type="submit"]:hover {
             background-color:rgb(25, 147, 133);
         }
-        .register-link{
+        {% comment %} .registration-link{
             color:grey;
             font-size: 10px;
             margin-top:10px;
         }
-        .register-link:hover{
+        .registration-link:hover{
             color:blue;
+        } {% endcomment %}
+        .link-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .link-container a {
+            color: grey;
+            font-size: 12px;
+        }
+
+        .link-container a:hover {
+            color: blue;
         }
     </style>
 </head>
@@ -103,8 +117,12 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <a href="{% url "register:signup" %}" class="register-link">Don't have an account? Register Now</a>
-    </div>
+        <div class="link-container">
+            <a href="{% url 'password_reset' %}" class="forgot-password-link">Forgot Password?</a>
+            <br>
+            <a href="{% url 'registration:signup' %}" class="registration-link">Don't have an account? Registration Now</a>
+        </div>
+       </div>
 <!-- Check for messages -->
 {% if messages %}
     <script>

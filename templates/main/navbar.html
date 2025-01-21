@@ -7,13 +7,13 @@
     </div>
     <nav class="navbar">
         <ul >
-            <li><a class="{{home}}" href="{% url "home" %}">Home</a></li>
+            <li><a class="{{profile}}" href="{% url "registration:profile" %}">Home</a></li>
             <li><a class="{{aboutus}}" href="{% url "aboutus" %}">About Us</a></li>
-            <li><a class="{{buying}}" href="{% url "register:buying" %}">Buying</a></li>
+            <li><a class="{{buying}}" href="{% url "registration:buying" %}">Buying</a></li>
             {% if request.user.is_authenticated %}
-            <li><a class="{{selling}}" href="{% url "register:selling" request.user.pk %}">Selling</a></li>
+            <li><a class="{{selling}}" href="{% url "registration:selling" request.user.pk %}">Selling</a></li>
             {% else %}
-            <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li>
+            <li><a class="{{selling}}" href="{% url "registration:selling2" %}">Selling</a></li>
             {% endif %}
             <li><a class="{{contactus}}" href="{% url "contactus" %}">Contact Us</a></li>
         </ul>
@@ -22,10 +22,10 @@
     <div class="h-btn">
         {% if request.user.is_authenticated %}
         <span class="hello"> Hello, {{request.user.username}} </span>
-        <a href="{% url "register:logout" %}" class="btn-logout">Logout</a>
+        <a href="{% url "registration:logout" %}" class="btn-logout">Logout</a>
         {% else %}
-        <a href="{% url "register:login" %}"  class="btn-login">Login</a>
-        <a href="{% url "register:signup" %}"  class="btn-signup">Sign Up</a>
+        <a href="{% url "registration:login" %}"  class="btn-login">Login</a>
+        <a href="{% url "registration:signup" %}"  class="btn-signup">Sign Up</a>
         {% endif %}
 
     </div>

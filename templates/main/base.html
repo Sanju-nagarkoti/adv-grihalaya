@@ -39,11 +39,11 @@
             <ul>
               <li><a href="{% url "aboutus" %}">About Us</a></li>
               <li><a href="{% url "contactus" %}">Contact</a></li>
-              <li><a href="{% url "register:buying" %}">Houses for buy</a></li>
+              <li><a href="{% url "registration:buying" %}">Houses for buy</a></li>
               {% if request.user.is_authenticated %}
-              <li><a  href="{% url "register:selling" request.user.pk %}">Selling</a></li>
+              <li><a  href="{% url "registration:selling" request.user.pk %}">Selling</a></li>
               {% comment %} {% else %}
-              <li><a class="{{selling}}" href="{% url "register:selling2" %}">Selling</a></li> {% endcomment %}
+              <li><a class="{{selling}}" href="{% url "registration:selling2" %}">Selling</a></li> {% endcomment %}
               {% endif %}
               
             </ul>
