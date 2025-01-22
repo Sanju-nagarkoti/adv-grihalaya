@@ -11,6 +11,8 @@ from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.db import transaction
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 
 # Create your views here.
@@ -225,6 +227,42 @@ def delete_room_image(request, image_pk):
     image.delete()
     return redirect('registration:sell_room_update', pk=image.room.pk)
 
+
+# about me
+@login_required
+def about_me(request):
+    # Initialize password form
+    password_form = PasswordChangeForm(user=request.user)
+    
+    if request.method == "POST":
+        # Check which form was submitted
+        if "update_info" in request.POST:  # Handle user info update
+            first_name = request.POST.get("first_name", "")
+            last_name = request.POST.get("last_name", "")
+            email = request.POST.get("email", "")
+
+            # Update user fields without affecting the password
+            user = request.user
+            user.first_name = first_name
+            user.last_name = last_name
+            user.email = email
+            user.save()
+
+            messages.success(request, "Your information has been updated successfully.")
+            return redirect("registration:about_me")
+
+        elif "change_password" in request.POST:  # Handle password change
+            password_form = PasswordChangeForm(user=request.user, data=request.POST)
+            if password_form.is_valid():
+                password_form.save()
+                messages.success(request, "Your password has been updated successfully.")
+                return redirect("registration:about_me")  # Prevent resubmission
+            else:
+                messages.error(request, "Please correct the errors below.")
+    
+    return render(request, "registration/aboutme.html", {
+        "password_form": password_form,
+    })
 
 
 

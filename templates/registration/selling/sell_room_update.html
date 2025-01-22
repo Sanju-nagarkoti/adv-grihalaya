@@ -26,7 +26,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="{% url 'register:sell_room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'registration:sell_room_detail' room.pk %}" class="btn btn-secondary">Cancel</a>
     </form>
 
     <!-- Display Existing Images -->
@@ -35,7 +35,7 @@
         {% for image in room.images.all %}
         <div class="m-2">
             <img src="{{ image.image.url }}" alt="Room Image" class="img-thumbnail" style="max-width: 150px;">
-            <form method="post" action="{% url 'register:delete_room_image' image.pk %}">
+            <form method="post" action="{% url 'registration:delete_room_image' image.pk %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
             </form>
