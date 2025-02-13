@@ -26,12 +26,10 @@
 
     <hr>
 
-    {% comment %} <h2>Change Password</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ password_form.as_p }}
-        <button type="submit" name="change_password" class="btn btn-primary mt-2">Change Password</button>
-    </form> {% endcomment %}
+    <hr>
+
+<h2>Change Password</h2>
+<p>If you want to update your password, <a href="{% url 'registration:change_password' %}">click here</a>.</p>
 
     {% if messages %}
     <script>

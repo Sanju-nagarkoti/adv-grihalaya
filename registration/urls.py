@@ -24,6 +24,10 @@ urlpatterns = [
     path('delete-room-image/<int:image_pk>/', views.delete_room_image, name='delete_room_image'),
 
     path("aboutme/", views.about_me, name="about_me"),
+    path("change-password/", views.change_password, name="change_password"),
+
+    
+    path('contactus/',views.contactus,name="contactus"),
     
     
  

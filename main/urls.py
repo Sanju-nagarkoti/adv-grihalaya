@@ -26,7 +26,6 @@ urlpatterns = [
     path('',views.profile,name="profile"),
     path('profile/',views.profile),
     path('aboutus/',views.aboutus,name="aboutus"),
-    path('contactus/',views.contactus,name="contactus"),
     path('accounts/', include('registration.urls', namespace='registration')),
     
 

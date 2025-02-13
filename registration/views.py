@@ -5,7 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RoomForm, CommentForm, RoomImageForm
+from .forms import RoomForm, CommentForm, RoomImageForm, ContactMessageForm
 from .models import Room, Comment, RoomImage
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
@@ -265,6 +265,37 @@ def about_me(request):
     })
 
 
+@login_required
+def change_password(request):
+    password_form = PasswordChangeForm(user=request.user)
+    
+    if request.method == "POST":
+        password_form = PasswordChangeForm(user=request.user, data=request.POST)
+        if password_form.is_valid():
+            password_form.save()
+            messages.success(request, "Your password has been updated successfully.")
+            return redirect("registration:change_password")  # Prevent resubmission
+        else:
+            messages.error(request, "Please correct the errors below.")
+
+    return render(request, "registration/change_password.html", {
+        "password_form": password_form,
+    })
+
+
+def contactus(request):
+    if request.method == "POST":
+        form = ContactMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect("registration:contactus")  # Redirect to avoid form resubmission
+        else:
+            messages.error(request, "There was an error. Please correct the form.")
+    else:
+        form = ContactMessageForm()
+
+    return render(request, "registration/contactus.html", {"form": form, "messages": messages.get_messages(request), "contactus": "active"})
 
 
 

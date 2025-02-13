@@ -60,14 +60,13 @@ ul li .active{
 
 }
 .h-btn a:hover{
-   border: 2px solid white;
-   border-radius: 5px;
-   padding: 2px;
+   color: #333;
 }
 .hello{
     display: inline-block;
     font-size: 18px;
     color: white;
+    text-decoration: underline;
 }
 
 

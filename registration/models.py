@@ -40,3 +40,13 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment by {self.user.username if self.user else 'Anonymous'} on {self.room.title}"
     
+    
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"
+    

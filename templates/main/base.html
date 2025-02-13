@@ -38,10 +38,10 @@
             <h4>Quick Links</h4>
             <ul>
               <li><a href="{% url "aboutus" %}">About Us</a></li>
-              <li><a href="{% url "contactus" %}">Contact</a></li>
-              <li><a href="{% url "registration:buying" %}">Houses for buy</a></li>
+              <li><a href="{% url "registration:contactus" %}">Contact</a></li>
+              <li><a href="{% url "registration:buying" %}">Book Room</a></li>
               {% if request.user.is_authenticated %}
-              <li><a  href="{% url "registration:selling" request.user.pk %}">Selling</a></li>
+              <li><a  href="{% url "registration:selling" request.user.pk %}">Rent Room</a></li>
               {% comment %} {% else %}
               <li><a class="{{selling}}" href="{% url "registration:selling2" %}">Selling</a></li> {% endcomment %}
               {% endif %}
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 Grihalaya Sewa. All Rights Reserved.</p>
+          <p>&copy; 2025 Grihalaya Sewa. All Rights Reserved.</p>
         </div>
       </footer>
 

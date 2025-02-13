@@ -3,6 +3,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from .models import Room, RoomImage, Comment
 from .widgets import MultiFileInput
+from .models import ContactMessage
 
 class RoomForm(forms.ModelForm):
     phone_validator = RegexValidator(
@@ -57,3 +58,9 @@ class CommentForm(forms.ModelForm):
         labels = {
             'content': 'Your Comment',
         }
+
+
+class ContactMessageForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ["name", "email", "message"]

@@ -22,20 +22,32 @@
                 <p><i class='bx bx-time'></i> <span>Opening Hours:</span> Sunday - Saturday: 7:00 AM - 6:00 PM</p>
     </div>
 
-            <div class="form-container">
-                <form action="/submit_contact_form" method="POST">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <div class="form-container">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
 
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+  
 
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+{% if messages %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        {% for message in messages %}
+        Swal.fire({
+            title: '{% if message.tags == "error" %}Error{% else %}Success{% endif %}',
+            text: '{{ message }}',
+            icon: '{% if message.tags == "error" %}error{% else %}success{% endif %}',
+            confirmButtonText: 'OK'
+        });
+        {% endfor %}
+    });
+</script>
+{% endif %}
 
-                    <input type="submit" value="Submit">
-                </form>
-            </div>    
+</div>
+
         </div>
     <div class="map-container">
         <div style="width: 100%; height: 400px;">
