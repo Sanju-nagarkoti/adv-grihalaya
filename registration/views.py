@@ -60,29 +60,29 @@ def signup_user(request):
         #Check for empty fields
         if not fname or not lname or not username or not email or not password or not repassword:
             messages.error(request, 'All fields are required')
-            return redirect('/registration/signup/')
+            return redirect('/accounts/signup/')
 
         # Check if passwords match
         if password != repassword:
             messages.error(request, 'Passwords do not match')
-            return redirect('/registration/signup/')
+            return redirect('/accounts/signup/')
 
         # Validate password
         try:
             validate_password(password)
         except ValidationError as e:
             messages.error(request, e.messages[0])
-            return redirect('/registration/signup/')
+            return redirect('/accounts/signup/')
 
         # Check if username already exists
         if User.objects.filter(username__iexact=username).exists():
             messages.error(request, "Username is already taken")
-            return redirect('/registration/signup/')
+            return redirect('/accounts/signup/')
 
         # Check if email already exists
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email is already registered")
-            return redirect('/registration/signup/')
+            return redirect('/accounts/signup/')
 
         # Create the user
         user = User.objects.create_user(username, email, password)
